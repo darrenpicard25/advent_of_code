@@ -5,6 +5,10 @@ version = 3
 [[package]]
 name = "advent_2015"
 version = "0.1.0"
+dependencies = [
+ "hex",
+ "md5hash",
+]
 
 [[package]]
 name = "advent_2018"
@@ -13,3 +17,15 @@ version = "0.1.0"
 [[package]]
 name = "advent_2019"
 version = "0.1.0"
+
+[[package]]
+name = "hex"
+version = "0.4.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
+
+[[package]]
+name = "md5hash"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b61778f580ecab8bb19f5512b774a13966f04ab4600cb424c888d8ef5da8983f"

@@ -1,14 +1,44 @@
 use advent_2015::Problem;
+use hex::ToHex;
+use md5hash::MD5Hasher;
 
 struct Day4Problem;
 
 impl Problem for Day4Problem {
     fn part_one(input: &str) -> String {
-        "TODO".to_string()
+        let mut answer = 0;
+        loop {
+            let mut hasher = MD5Hasher::new();
+            let value = format!("{input}{answer}");
+            hasher.digest(&value);
+
+            let results = hasher.finish();
+
+            if results.encode_hex::<String>().starts_with("00000") {
+                break;
+            }
+            answer += 1;
+        }
+
+        answer.to_string()
     }
 
     fn part_two(input: &str) -> String {
-        "TODO".to_string()
+        let mut answer = 0;
+        loop {
+            let mut hasher = MD5Hasher::new();
+            let value = format!("{input}{answer}");
+            hasher.digest(&value);
+
+            let results = hasher.finish();
+
+            if results.encode_hex::<String>().starts_with("000000") {
+                break;
+            }
+            answer += 1;
+        }
+
+        answer.to_string()
     }
 }
 
@@ -29,9 +59,8 @@ mod tests {
 
     #[test]
     fn part_1() {
-        assert_eq!("2", Day4Problem::part_one(">"));
-        assert_eq!("4", Day4Problem::part_one("^>v<"));
-        assert_eq!("2", Day4Problem::part_one("^v^v^v^v^v"));
+        assert_eq!("609043", Day4Problem::part_one("abcdef"));
+        assert_eq!("1048970", Day4Problem::part_one("pqrstuv"));
     }
 
     #[test]
