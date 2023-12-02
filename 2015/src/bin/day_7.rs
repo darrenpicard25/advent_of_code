@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use advent_2015::Problem;
+use aoc_2015::Problem;
 
 #[derive(Debug)]
 enum Value<'a> {
@@ -130,7 +130,7 @@ impl Problem for Day7Problem {
 
 fn main() {
     println!("{:?}", std::env::current_dir());
-    let file = std::fs::read("./advent_2015/data/day_7.txt").unwrap();
+    let file = std::fs::read("./aoc_2015/data/day_7.txt").unwrap();
     let input = std::str::from_utf8(&file).unwrap();
 
     println!("Part 1: {}", Day7Problem::part_one(input));
@@ -139,7 +139,7 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use advent_2015::Problem;
+    use aoc_2015::Problem;
 
     use crate::Day7Problem;
 

@@ -1,4 +1,4 @@
-use advent_2022::Problem;
+use aoc_2022::Problem;
 
 struct Base10(i64);
 
@@ -84,7 +84,7 @@ impl Problem for Day25Problem {
 
 fn main() {
     println!("{:?}", std::env::current_dir());
-    let file = std::fs::read("./advent_2022/data/day_25.txt").unwrap();
+    let file = std::fs::read("./aoc_2022/data/day_25.txt").unwrap();
     let input = std::str::from_utf8(&file).unwrap();
 
     println!("Part 1: {}", Day25Problem::part_one(input));
@@ -93,7 +93,7 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use advent_2022::Problem;
+    use aoc_2022::Problem;
 
     use crate::Day25Problem;
 

@@ -1,4 +1,4 @@
-use advent_2020::Problem;
+use aoc_2020::Problem;
 
 #[derive(Debug)]
 struct Directions(VerticalDirections, HorizontalDirections);
@@ -185,7 +185,7 @@ impl Problem for Day5Problem {
 
 fn main() {
     println!("{:?}", std::env::current_dir());
-    let file = std::fs::read("./advent_2020/data/day_5.txt").unwrap();
+    let file = std::fs::read("./aoc_2020/data/day_5.txt").unwrap();
     let input = std::str::from_utf8(&file).unwrap();
 
     println!("Part 1: {}", Day5Problem::part_one(input));
@@ -194,7 +194,7 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use advent_2020::Problem;
+    use aoc_2020::Problem;
 
     use crate::Day5Problem;
 

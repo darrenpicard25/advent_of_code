@@ -1,4 +1,4 @@
-use advent_2020::Problem;
+use aoc_2020::Problem;
 
 struct Day7Problem;
 
@@ -35,7 +35,7 @@ impl Problem for Day7Problem {
 
 fn main() {
     println!("{:?}", std::env::current_dir());
-    let file = std::fs::read("./advent_2020/data/day_6.txt").unwrap();
+    let file = std::fs::read("./aoc_2020/data/day_6.txt").unwrap();
     let input = std::str::from_utf8(&file).unwrap();
 
     println!("Part 1: {}", Day7Problem::part_one(input));
@@ -44,7 +44,7 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use advent_2020::Problem;
+    use aoc_2020::Problem;
 
     use crate::Day7Problem;
 

@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use advent_2015::Problem;
+use aoc_2015::Problem;
 
 struct Day7Problem;
 
@@ -10,7 +10,6 @@ impl Problem for Day7Problem {
     fn part_one(input: &str) -> String {
         let x = input.lines().map(|line| {
             let num_characters_code = line.trim().chars().count();
-            let mem_iterator = line.trim().chars().fold(0, |acc, char| {});
         });
         todo!()
     }
@@ -22,7 +21,7 @@ impl Problem for Day7Problem {
 
 fn main() {
     println!("{:?}", std::env::current_dir());
-    let file = std::fs::read("./advent_2015/data/day_8.txt").unwrap();
+    let file = std::fs::read("./aoc_2015/data/day_8.txt").unwrap();
     let input = std::str::from_utf8(&file).unwrap();
 
     println!("Part 1: {}", Day7Problem::part_one(input));
@@ -31,7 +30,7 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use advent_2015::Problem;
+    use aoc_2015::Problem;
 
     use crate::Day7Problem;
 

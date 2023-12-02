@@ -1,4 +1,4 @@
-use advent_2022::Problem;
+use aoc_2022::Problem;
 
 struct Day1Problem;
 
@@ -23,7 +23,7 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use advent_2022::Problem;
+    use aoc_2022::Problem;
 
     use crate::Day1Problem;
 
