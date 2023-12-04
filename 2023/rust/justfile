@@ -5,6 +5,8 @@ lint day:
 
 test day:
     cargo test -p {{day}}
+run day part:
+    cargo run -p {{day}} --bin {{part}}
 bench-all:
     cargo bench -q > benchmarks.txt
 bench day part:
