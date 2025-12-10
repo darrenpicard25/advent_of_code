@@ -1,0 +1,15 @@
+# Use `just work day-01 part1` to work on the specific binary for a specific day's problems
+
+lint day:
+    cargo clippy -p {{day}}
+
+test day:
+    cargo test -p {{day}}
+run day part:
+    cargo run -p {{day}} --bin {{part}}
+bench-all:
+    cargo bench -q > benchmarks.txt
+bench day part:
+    cargo bench --bench {{day}} {{part}} >> {{day}}.bench.txt
+create day:
+    cargo generate --path ./template --name {{day}}

@@ -1,0 +1,11 @@
+[workspace]
+members = [
+    "day-*",
+    "day-01",
+    "day-02",
+    "day-03",
+]
+resolver = "2"
+
+[workspace.dependencies]
+divan = "0.1.4"
