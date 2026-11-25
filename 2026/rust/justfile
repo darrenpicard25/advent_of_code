@@ -1,0 +1,107 @@
+# List available recipes
+default:
+    @just --list
+
+# Scaffold a new day from ./template into ./days (e.g. `just create day-01`)
+create day:
+    mkdir -p days && cargo generate --path ./template --destination ./days --name {{ day }} --no-workspace --vcs none
+
+# Lint a single day or the whole workspace (`just lint`, `just lint day-01`)
+lint day="":
+    {{ if day == "" { "cargo clippy --workspace --all-targets" } else { "cargo clippy -p " + day + " --all-targets" } }}
+
+# Test a single day or all days (`just test`, `just test 1`, `just test day-01`, `just test day-01 1`)
+test day="" part="":
+    @set -eu; \
+    day="{{ day }}"; \
+    part="{{ part }}"; \
+    if [ -z "$part" ]; then \
+        case "$(printf '%s' "$day" | tr '[:upper:]' '[:lower:]')" in \
+            1|2|part1|part_1|part-1|part2|part_2|part-2|both|all) \
+                part="$day"; \
+                day=""; \
+                ;; \
+        esac; \
+    fi; \
+    case "$(printf '%s' "$part" | tr '[:upper:]' '[:lower:]')" in \
+        ""|both|all) filter="" ;; \
+        1|part1|part_1|part-1) filter="part1" ;; \
+        2|part2|part_2|part-2) filter="part2" ;; \
+        *) filter="$part" ;; \
+    esac; \
+    if [ -n "$day" ]; then \
+        set -- cargo test -p "$day"; \
+    else \
+        set -- cargo test --workspace; \
+    fi; \
+    if [ -n "$filter" ]; then \
+        set -- "$@" "$filter"; \
+    fi; \
+    exec "$@"
+
+# Run a single day or all days (`just run`, `just run 1`, `just run day-01`, `just run day-01 1`)
+run day="" part="":
+    @set -eu; \
+    day="{{ day }}"; \
+    part="{{ part }}"; \
+    if [ -z "$part" ]; then \
+        case "$(printf '%s' "$day" | tr '[:upper:]' '[:lower:]')" in \
+            1|2|part1|part_1|part-1|part2|part_2|part-2|both|all) \
+                part="$day"; \
+                day=""; \
+                ;; \
+        esac; \
+    fi; \
+    if [ -n "$day" ]; then \
+        if [ -n "$part" ]; then \
+            exec cargo run --release -q -p "$day" -- "$part"; \
+        else \
+            exec cargo run --release -q -p "$day"; \
+        fi; \
+    else \
+        found=0; \
+        for d in days/day-*; do \
+            [ -d "$d" ] || continue; \
+            found=1; \
+            name="${d##*/}"; \
+            echo "=== $name ==="; \
+            if [ -n "$part" ]; then \
+                cargo run --release -q -p "$name" -- "$part"; \
+            else \
+                cargo run --release -q -p "$name"; \
+            fi; \
+        done; \
+        if [ "$found" -eq 0 ]; then \
+            echo "No days/day-* crates found."; \
+        fi; \
+    fi
+
+# Benchmark a single day or all days (`just bench`, `just bench 1`, `just bench day-01`, `just bench day-01 1`, `just bench all`)
+bench day="" part="":
+    @set -eu; \
+    day="{{ day }}"; \
+    part="{{ part }}"; \
+    if [ -z "$part" ]; then \
+        case "$(printf '%s' "$day" | tr '[:upper:]' '[:lower:]')" in \
+            1|2|part1|part_1|part-1|part2|part_2|part-2|both|all) \
+                part="$day"; \
+                day=""; \
+                ;; \
+        esac; \
+    fi; \
+    case "$(printf '%s' "$part" | tr '[:upper:]' '[:lower:]')" in \
+        ""|both) filter="both" ;; \
+        1|part1|part_1|part-1) filter="part1" ;; \
+        2|part2|part_2|part-2) filter="part2" ;; \
+        all) filter="" ;; \
+        *) filter="$part" ;; \
+    esac; \
+    if [ -n "$day" ]; then \
+        set -- cargo bench --bench "$day"; \
+    else \
+        set -- cargo bench --workspace --benches; \
+    fi; \
+    if [ -n "$filter" ]; then \
+        set -- "$@" -- "$filter"; \
+    fi; \
+    exec "$@"

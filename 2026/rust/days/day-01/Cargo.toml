@@ -1,0 +1,23 @@
+[package]
+name = "day-01"
+version.workspace = true
+edition.workspace = true
+
+[lib]
+bench = false
+
+[[bin]]
+name = "day-01"
+path = "src/main.rs"
+bench = false
+
+[[bench]]
+name = "day-01"
+path = "benches/benchmarks.rs"
+harness = false
+
+[dependencies]
+common.workspace = true
+
+[dev-dependencies]
+divan.workspace = true
